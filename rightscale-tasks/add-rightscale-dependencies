@@ -8,8 +8,9 @@ packages+=('curl')
 packages+=('git-core')
 
 # These packages are not strictly necessary, but many RightScripts
-# will fail if these do not exist. RightScale won't even be able to
-# create a user account for you, so without these you would have to
-# take care of that through other means.
+# will fail if these do not exist. RightScale will not even be able to
+# create a user account for you without sudo (for example), so without
+# these you would have to take care of that through other means.
 packages+=('ruby1.8')
+packages+=('rubygems')
 packages+=('sudo')
