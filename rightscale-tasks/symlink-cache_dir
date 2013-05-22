@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Old RightScripts may expect metadata to be stored in /var/spool/ec2. This
+# location is no longer used by newer RightLink versions, which instead use
+# /var/spool/cloud. This script symlinks ec2 to cloud for backwards
+# compatibility.
+
+declare file
+
+# Create cloud dir if necessary.
+if [ ! -d "${imagedir}/var/spool/cloud" ]
+then
+    mkdir -p "${imagedir}/var/spool/cloud"
+fi
+
+# Move any content from ec2 to cloud.
+for file in "${imagedir}"/var/spool/ec2/*
+do
+    mv "${file}" /var/spool/cloud/
+done
+
+# Finally, symlink ec2 to cloud dir for backwards compatibility.
+if [ ! -h "${imagedir}/var/spool/ec2" ]
+then
+    cd "${imagedir}/var/spool" ; ln -sf cloud ec2
+fi
