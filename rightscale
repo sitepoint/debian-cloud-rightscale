@@ -1,0 +1,10 @@
+#!/bin/bash
+
+insert_task_after ${TASK_PACKAGES} \
+    ${plugindir}/rightscale-tasks/add-rightscale-dependencies
+
+insert_task_after ${TASK_APT_UPGRADE} \
+    ${plugindir}/rightscale-tasks/add-rightscale-package
+
+insert_task_after ${TASK_APT_UPGRADE} \
+    ${plugindir}/rightscale-tasks/symlink-cache_dir
