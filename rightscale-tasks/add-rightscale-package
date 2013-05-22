@@ -17,6 +17,13 @@ declare -r tmp_dir="/tmp"
 declare -r sha512_file="$(readlink -f ${taskdir}/SHA512SUMS)"
 declare deb_md5
 
+# We must tell the rightscale package the cloud we use.
+if [ ! -d "${imagedir}/etc/rightscale.d" ]
+then
+    mkdir -p "${imagedir}/etc/rightscale.d"
+fi
+echo "${platform}" > "${imagedir}/etc/rightscale.d/cloud"
+
 wget -q -P "${imagedir}/${tmp_dir}" "${url}"
 
 if [ -f "${imagedir}/${tmp_dir}/${deb}" ]
