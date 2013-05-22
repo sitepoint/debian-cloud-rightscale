@@ -15,12 +15,10 @@ then
     if ! echo "${deb_md5}  ${imagedir}/${tmp_dir}/${deb}" | \
         md5sum --quiet -c -; then
     then
-        echo "Error: ${deb} corrupted!" >&2
-        exit 1
+        die "Error: ${deb} corrupted!"
     fi
 else
-    echo "Error: Failed to download '${deb}'." >&2
-    exit 1
+    die "Error: Failed to download '${deb}'."
 fi
 
 chroot "${imagedir}" "dpkg -i ${tmp_dir}/${deb}"
