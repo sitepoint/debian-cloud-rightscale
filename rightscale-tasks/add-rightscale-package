@@ -39,7 +39,7 @@ else
     die "Error: Failed to download '${deb}'."
 fi
 
-chroot "${imagedir}" "dpkg -i ${tmp_dir}/${deb}" || \
+chroot "${imagedir}" dpkg -i "${tmp_dir}/${deb}" || \
     die "Error: '${tmp_dir}/${deb}' failed installation"
 
 rm -f "${imagedir}/${tmp_dir}/${deb}"
