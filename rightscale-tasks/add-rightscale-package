@@ -14,7 +14,7 @@ fi
 declare -r deb="rightscale_${version}-ubuntu_10.04-${arch}.deb"
 declare -r url="http://mirror.rightscale.com/rightscale_rightlink/${version}/ubuntu/${deb}"
 declare -r tmp_dir="/tmp"
-declare -r sha512_file="${taskdir}/SHA512SUMS"
+declare -r sha512_file="$(readlink -f ${taskdir}/SHA512SUMS)"
 declare deb_md5
 
 wget -P "${imagedir}/${tmp_dir}" "${url}"
