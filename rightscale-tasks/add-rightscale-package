@@ -1,24 +1,32 @@
 #!/bin/bash
 
 # Install RightScale's RightLink package.
+
 declare -r version="${RIGHTSCALE_VERSION:-5.8.8}"
-declare -r deb="rightscale_${version}-ubuntu_10.04-amd64.deb"
-declare -r deb_md5="ee2688aef7512d119ff117b200565e0f"
+declare -r deb="rightscale_${version}-ubuntu_10.04-${arch}.deb"
 declare -r url="http://mirror.rightscale.com/rightscale_rightlink/${version}/ubuntu/${deb}"
 declare -r tmp_dir="/tmp"
+declare -r sha512_file="${taskdir}/SHA512SUMS"
+declare deb_md5
 
 wget -P "${imagedir}/${tmp_dir}" "${url}"
 
 if [ -f "${imagedir}/${tmp_dir}/${deb}" ]
 then
-    cd "${imagedir}/${tmp_dir}"
-    if [ "${version}" = "5.8.8" ] && \
-        ! echo "${deb_md5}  ${imagedir}/${tmp_dir}/${deb}" | \
-        md5sum --quiet -c -; then
+    grep -q -m 1 "${deb}" "${sha512_file}"
+    if [ "${?}" -ne 0 ]
     then
-        die "Error: ${deb} corrupted!"
+	log "No known checksum for ${version}. Skipping check."
+    else
+	cd "${imagedir}/${tmp_dir}"
+	if ! grep -m 1 "${deb}" "${sha512_file}" | \
+            sed -e 's/\ \ .*\(rightscale_.*\)/\ \ \1/' | \
+            sha512sum --quiet -c -
+	then
+            die "Error: ${deb} corrupted!"
+	fi
+	cd -
     fi
-    cd -
 else
     die "Error: Failed to download '${deb}'."
 fi
