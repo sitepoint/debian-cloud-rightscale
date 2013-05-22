@@ -20,5 +20,7 @@ find "${imagedir}/var/spool/ec2/" -mindepth 1 -maxdepth 1 -exec \
 # Finally, symlink ec2 to cloud dir for backwards compatibility.
 if [ ! -h "${imagedir}/var/spool/ec2" ]
 then
-    cd "${imagedir}/var/spool" ; ln -sf cloud ec2
+    cd "${imagedir}/var/spool"
+    ln -sf cloud ec2
+    cd -
 fi
