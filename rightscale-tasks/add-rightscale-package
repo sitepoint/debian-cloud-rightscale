@@ -2,7 +2,15 @@
 
 # Install RightScale's RightLink package.
 
-declare -r version="${RIGHTSCALE_VERSION:-5.8.8}"
+declare version
+
+if [ "${arch}" = "i386" ]
+then
+    version="${RIGHTSCALE_VERSION:-5.7.16}"
+else
+    version="${RIGHTSCALE_VERSION:-5.8.8}"
+fi
+
 declare -r deb="rightscale_${version}-ubuntu_10.04-${arch}.deb"
 declare -r url="http://mirror.rightscale.com/rightscale_rightlink/${version}/ubuntu/${deb}"
 declare -r tmp_dir="/tmp"
