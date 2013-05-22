@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Install dependencies
+host_packages+=('lsb-release')
+host_packages+=('debconf')
+host_packages+=('dnsutils')
+host_packages+=('curl')
+host_packages+=('git-core')

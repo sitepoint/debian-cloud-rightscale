@@ -7,13 +7,6 @@ declare -r deb_md5="ee2688aef7512d119ff117b200565e0f"
 declare -r url="http://mirror.rightscale.com/rightscale_rightlink/${version}/ubuntu/${deb}"
 declare -r tmp_dir="/tmp"
 
-# Install dependencies
-host_packages+=('lsb-release')
-host_packages+=('debconf')
-host_packages+=('dnsutils')
-host_packages+=('curl')
-host_packages+=('git-core')
-
 wget -P "${imagedir}/${tmp_dir}" "${url}"
 
 if [ -f "${imagedir}/${tmp_dir}/${deb}" ]
