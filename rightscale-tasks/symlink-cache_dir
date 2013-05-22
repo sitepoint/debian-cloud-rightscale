@@ -14,10 +14,8 @@ then
 fi
 
 # Move any content from ec2 to cloud.
-for file in "${imagedir}"/var/spool/ec2/*
-do
-    mv "${file}" /var/spool/cloud/
-done
+find "${imagedir}/var/spool/ec2/" -mindepth 1 -maxdepth 1 -exec \
+    mv -f {} "${imagedir}/var/spool/cloud/" \;
 
 # Finally, symlink ec2 to cloud dir for backwards compatibility.
 if [ ! -h "${imagedir}/var/spool/ec2" ]
