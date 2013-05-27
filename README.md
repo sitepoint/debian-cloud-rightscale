@@ -1,8 +1,8 @@
 debian-cloud-rightscale
 =======================
 
-RightScale's RightLink installer plugin for
-[build-debian-cloud](https://github.com/camptocamp/build-debian-cloud).
+RightScale's RightLink installer plugin for Andsen's
+[build-debian-cloud](https://github.com/andsens/build-debian-cloud) fork.
 
 ## Usage
 
